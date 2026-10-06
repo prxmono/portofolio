@@ -5,7 +5,7 @@ const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.nextTick.DB_NAME,
+    database: process.env.DB_NAME,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -13,11 +13,11 @@ const pool = mysql.createPool({
 
 const db = pool.promise();
 
-pool.getConnection((err, connectuion) =>  {
+pool.getConnection((err, connection) =>  {
     if(err) {
         console.error('Kesalahan Koneksi Database', err.message);
     } else {
-        console.log('Berhasil Terhubung ke Database MySQL (db_portofolio)');
+        console.log('Berhasil Terhubung ke Database MySQL (db_porto)');
         connection.release();
     }
 });

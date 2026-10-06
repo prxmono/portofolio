@@ -16,9 +16,10 @@ const getProfile = async (req, res) => {
             message: 'Berhasil mengambil data profil.',
             data: profile
         });
+
     } catch (error) {
         console.error('Error getProfile:', error.message);
-        res.status(500),json({
+        res.status(500).json({
             success: false,
             message: 'Terjadi kesalahan pada server.',
             error: error.message
@@ -26,7 +27,7 @@ const getProfile = async (req, res) => {
     }
 };
 
-const updateProfile = async (res, req) => {
+const updateProfile = async (req, res) => {
     try {
         const {id} = req.params;
         const data = req.body;
@@ -40,17 +41,18 @@ const updateProfile = async (res, req) => {
 
         const result = await profileModel.updateProfile(id, data);
 
-        if (result.affectedRows ===0) {
+        if (result.affectedRows === 0) {
             return res.status(404).json({
                 success: false,
                 message: `Profil dengan ID ${id} tidak ditemukan.`
             });
         }
 
-        res.status(200),json({
+        res.status(200).json({
             success: true,
             message: 'Data profil berhasil diperbarui.'
         });
+        
         } catch (error) {
             console.error('Error updateProfile:', error.message);
             res.status(500).json({

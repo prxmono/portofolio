@@ -7,7 +7,7 @@ dotenv.config();
 const db = require('./config/db');
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -42,8 +42,14 @@ app.get('/api/biodata', (req, res) => {
 });
 
 const profileRoutes = require('./routes/profileRoutes');
-app.use('/api/profile', profileRoutes);
+const projectRoutes = require('./routes/projectRoutes');
+const skillRoutes = require('./routes/skillRoutes');
+const experiencesRoutes = require('./routes/experiencesRoutes');
 
+app.use('/api/profile', profileRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/skill', skillRoutes);
+app.use('/api/experiences', experiencesRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
