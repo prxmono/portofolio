@@ -45,11 +45,13 @@ const profileRoutes = require('./routes/profileRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const skillRoutes = require('./routes/skillRoutes');
 const experiencesRoutes = require('./routes/experiencesRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 app.use('/api/profile', profileRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/skill', skillRoutes);
 app.use('/api/experiences', experiencesRoutes);
+app.use('/api/contacts', contactRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
@@ -59,8 +61,8 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`==========================`);
+    console.log(`========================================================`);
     console.log(`Server berjalan di: http://localhost:${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`==========================`)
+    console.log(`========================================================`)
 });
