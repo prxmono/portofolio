@@ -6,7 +6,7 @@ const getAllContacts = async () => {
 };
 
 const getContactById = async (id) => {
-    const [rows] = await db.query('SELECT * FROM messages WHRE id = ?', [id]);
+    const [rows] = await db.query('SELECT * FROM messages WHERE id = ?', [id]);
     return rows[0];
 };
 
@@ -20,7 +20,7 @@ const createContact = async (data) => {
 };
 
 const deleteContact = async (id) => {
-    const [result] = await db.query('DELETE FROM message WHERE id = ?', [id]);
+    const [result] = await db.query('DELETE FROM messages WHERE id = ?', [id]);
     return result;
 };
 

@@ -46,12 +46,14 @@ const projectRoutes = require('./routes/projectRoutes');
 const skillRoutes = require('./routes/skillRoutes');
 const experiencesRoutes = require('./routes/experiencesRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const certificateRoutes = require('./routes/certificateRoutes');
 
 app.use('/api/profile', profileRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/skill', skillRoutes);
 app.use('/api/experiences', experiencesRoutes);
 app.use('/api/contacts', contactRoutes);
+app.use('/api/certificates', certificateRoutes);
 
 app.use((req, res) => {
     res.status(404).json({

@@ -6,7 +6,7 @@ const getAllProjects = async () => {
 };
 
 const getProjectById = async (id) => {
-    const [rows] = await db.qquery('SELECT * FROM projects WHERE id = ?', [id]);
+    const [rows] = await db.query('SELECT * FROM projects WHERE id = ?', [id]);
     return rows [0];
 };
 
