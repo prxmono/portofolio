@@ -1,0 +1,135 @@
+const testimoniModel = require('../models/testimoniModel');
+
+const getAllTestimoni = async (req, res) => {
+    try {
+        const testimoni = await testimoniModel.getAllTestimoni();
+        res.status(200).json({
+            success: true,
+            total: testimoni.length,
+            data: testimoni
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server Error',
+            error: error.message
+        });
+    }
+};
+
+const getTestimoniById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const testimoni = await testimoniModel.getTestimoniById(id);
+
+        if (!testimoni) {
+            return res.status(404).json({
+                success: false,
+                message: 'Data sertifikat tidak ditemukan'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: testimoni
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server Error',
+            error: error.message
+        })
+    }
+};
+
+const createTestimoni = async (req, res) => {
+    try {
+        const data = req.body;
+
+        if (!data.name) {
+            return res.status(400).json({
+                success: false,
+                message: 'Data wajib diisi'
+            });
+        }
+
+        const result = await testimoniModel.createTestimoni(data);
+        res.status(201).json({
+            success: true,
+            message: 'Sertifikat berhasil ditambahkan',
+            data: { id: result.insertId }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server Error',
+            error: error.message
+        });
+    }
+};
+
+const updateTestimoni = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = req.body;
+
+        if (!data.name) {
+            return res.status(400).json({
+                success: false,
+                message: 'Data wajib diisi'
+            });
+        }
+
+        const result = await testimoniModel.updateTestimoni(id, data);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Data testimoni tidak ditemukan'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Testimoni berhasil diperbarui'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const deleteTestimoni = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await testimoniModel.deleteTestimoni(id);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Data testimoni tidak ditemukan'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Testimoni berhasil dihapus'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server Error',
+            error: error.message
+        });
+    }
+};
+
+module.exports = {
+    getAllTestimoni,
+    getTestimoniById,
+    createTestimoni,
+    updateTestimoni,
+    deleteTestimoni
+};
