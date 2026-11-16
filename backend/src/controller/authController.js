@@ -97,6 +97,7 @@ const login = async (req, res) => {
 
     const secret = process.env.JWT_SECRET || 'kunci_rahasia_portofolio_super_aman_12345';
     const expiresIn = process.env.JWT_EXPIRES_IN || '1d';
+    const token = jwt.sign(payload, secret, { expiresIn });
 
      res.status(200).json({
       success: true,
