@@ -1,4 +1,4 @@
-const bcrypt = require('bcryotjs');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel');
 
@@ -6,7 +6,7 @@ const register = async (req, res) => {
     try {
         const { username, email, password, role } = req.body;
 
-        if (!uername || !email || !password) {
+        if (!username || !email || !password) {
             return res.status(400).json({
                 success: false,
                 message: 'Username, email, dan password wajib diisi!'

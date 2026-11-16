@@ -20,7 +20,7 @@ const findById = async (id) => {
 
 const createUser = async (data) => {
     const { username, email, password, role } = data;
-    const [result] = await data.query(
+    const [result] = await db.query(
         'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)',
         [username, email, password, role || 'user']
     );

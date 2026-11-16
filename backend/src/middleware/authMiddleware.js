@@ -2,15 +2,15 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
     try {
-        const authheader = req.headers['authorization'];
-        if (!authheader) {
+        const authHeader = req.headers['authorization'];
+        if (!authHeader) {
             return res.status(401).json({
                 success: false,
                 message: 'Akses ditolak! Token autentikasi tidak ditemukan.'
             });
         }
 
-        const token = authheader.startsWith('Bearer ') ? authheader.split(' ')[1] : authheader;
+        const token = authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : authHeader;
 
         if (!token) {
             return res.status(401).json({

@@ -62,6 +62,7 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/certificates', certificateRoutes);
 app.use('/api/testimoni', testimoniRoutes);
 app.use('/api/resumes', resumeRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
